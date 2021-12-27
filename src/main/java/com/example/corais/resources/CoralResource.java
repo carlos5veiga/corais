@@ -3,23 +3,26 @@ package com.example.corais.resources;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.corais.domain.Coral;
+import com.example.corais.services.CoralService;
 
 @RestController
 @RequestMapping(value="/corais")
 public class CoralResource {
+	
+	@Autowired
+	private CoralService service;
 
-	@RequestMapping(method = RequestMethod.GET)
-	public List<Coral> listar() {
-		Coral c1 = new Coral(1, "Ars Cantandi");
-		Coral c2 = new Coral(2, "Novos Cantos");
-		List<Coral> lista = new ArrayList<>();
-		lista.add(c1);
-		lista.add(c2);
-		return lista;
-	}
+	@RequestMapping(value="/{id}", method = RequestMethod.GET)
+	public ResponseEntity<?> find(@PathVariable Integer id) {
+		Coral obj = service.buscar(id);
+		return ResponseEntity.ok().body(obj);
+		}
 }
