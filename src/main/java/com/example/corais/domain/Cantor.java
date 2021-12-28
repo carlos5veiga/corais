@@ -9,27 +9,32 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
 @Entity
-public class Coral implements Serializable {
+public class Cantor implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
-	private String nome;
+	private String name;
 	
-	@ManyToMany(mappedBy="listaCorais")
-	private List<Cantor> listaCantores = new ArrayList<>();
+	@ManyToMany
+	@JoinTable(name="CANTOR_CORAL",
+				joinColumns = @JoinColumn(name="cantor_id"),
+				inverseJoinColumns = @JoinColumn(name="coral_id"))
+	private List<Coral> listaCorais = new ArrayList<>();
 	
-	public Coral() {
+	public Cantor() {
 	}
 
-	public Coral(Integer id, String nome) {
+	public Cantor(Integer id, String name) {
 		super();
 		this.id = id;
-		this.nome = nome;
+		this.name = name;
 	}
 
 	public Integer getId() {
@@ -40,22 +45,22 @@ public class Coral implements Serializable {
 		this.id = id;
 	}
 
-	public String getNome() {
-		return nome;
+	public String getName() {
+		return name;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public List<Cantor> getListaCantores() {
-		return listaCantores;
+	public List<Coral> getListaCorais() {
+		return listaCorais;
 	}
 
-	public void setListaCantores(List<Cantor> listaCantores) {
-		this.listaCantores = listaCantores;
+	public void setListaCorais(List<Coral> listaCorais) {
+		this.listaCorais = listaCorais;
 	}
-	
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
@@ -69,8 +74,9 @@ public class Coral implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Coral other = (Coral) obj;
+		Cantor other = (Cantor) obj;
 		return Objects.equals(id, other.id);
 	}
-
+	
+	
 }
