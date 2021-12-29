@@ -13,6 +13,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 public class Cantor implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -22,6 +24,7 @@ public class Cantor implements Serializable {
 	private Integer id;
 	private String name;
 	
+	@JsonBackReference
 	@ManyToMany
 	@JoinTable(name="CANTOR_CORAL",
 				joinColumns = @JoinColumn(name="cantor_id"),

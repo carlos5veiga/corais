@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.corais.domain.Coral;
 import com.example.corais.repositories.CoralRepository;
+import com.example.corais.services.exceptions.ObjectNotFoundException;
 
 @Service
 public class CoralService {
@@ -16,6 +17,7 @@ public class CoralService {
 	
 	public Coral buscar(Integer id) {
 		Optional<Coral> obj = repo.findById(id);
-		return obj.orElse(null);
+		return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado. Id: " + id +
+				", Tipo: " + Coral.class.getName()));
 	}
 }
