@@ -22,7 +22,6 @@ public class Coral implements Serializable {
 	private Integer id;
 	private String nome;
 	
-	@JsonManagedReference
 	@ManyToMany(mappedBy="listaCorais")
 	private List<Cantor> listaCantores = new ArrayList<>();
 	

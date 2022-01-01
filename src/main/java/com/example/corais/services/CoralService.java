@@ -20,4 +20,9 @@ public class CoralService {
 		return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado. Id: " + id +
 				", Tipo: " + Coral.class.getName()));
 	}
+	
+	public Coral insert(Coral obj) {
+		obj.setId(null);
+		return repo.save(obj);
+	}
 }
