@@ -30,6 +30,11 @@ public class CoraisApplication implements CommandLineRunner {
 		
 		Coral cor1 = new Coral(null, "Ars Cantandi");
 		Coral cor2 = new Coral(null, "Novos Cantos");
+		Coral cor3 = new Coral(null, "Pentágono");
+		Coral cor4 = new Coral(null, "Bahiana");
+		Coral cor5 = new Coral(null, "Câmara");
+		Coral cor6 = new Coral(null, "FIEB");
+		Coral cor7 = new Coral(null, "CIMATEC");
 		
 		Cantor cant1 = new Cantor(null, "Valcy");
 		Cantor cant2 = new Cantor(null, "Babita");
@@ -42,7 +47,7 @@ public class CoraisApplication implements CommandLineRunner {
 		cant2.getListaCorais().addAll(Arrays.asList(cor2));
 		cant3.getListaCorais().addAll(Arrays.asList(cor1));
 		
-		coralRepository.saveAll(Arrays.asList(cor1, cor2));
+		coralRepository.saveAll(Arrays.asList(cor1, cor2, cor3, cor4, cor5, cor6, cor7));
 		cantorRepository.saveAll(Arrays.asList(cant1, cant2, cant3));
 		
 	}
