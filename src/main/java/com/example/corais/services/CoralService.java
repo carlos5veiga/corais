@@ -15,7 +15,7 @@ public class CoralService {
 	@Autowired
 	private CoralRepository repo;
 	
-	public Coral buscar(Integer id) {
+	public Coral find(Integer id) {
 		Optional<Coral> obj = repo.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado. Id: " + id +
 				", Tipo: " + Coral.class.getName()));
@@ -23,6 +23,10 @@ public class CoralService {
 	
 	public Coral insert(Coral obj) {
 		obj.setId(null);
+		return repo.save(obj);
+	}
+	
+	public Coral update(Coral obj) {
 		return repo.save(obj);
 	}
 }
