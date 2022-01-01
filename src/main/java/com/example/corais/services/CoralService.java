@@ -1,5 +1,6 @@
 package com.example.corais.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,5 +42,9 @@ public class CoralService {
 		catch (DataIntegrityViolationException e) {
 			throw new DataIntegrityException("Não é possível excluir um coral que possui cantores");
 		}
+	}
+	
+	public List<Coral> findAll(){
+		return repo.findAll();
 	}
 }

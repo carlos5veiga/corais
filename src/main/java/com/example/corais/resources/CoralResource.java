@@ -1,6 +1,8 @@
 package com.example.corais.resources;
 
 import java.net.URI;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.example.corais.domain.Coral;
+import com.example.corais.dto.CoralDTO;
 import com.example.corais.services.CoralService;
 
 @RestController
@@ -25,7 +28,7 @@ public class CoralResource {
 	public ResponseEntity<Coral> find(@PathVariable Integer id) {
 		Coral obj = service.find(id);
 		return ResponseEntity.ok().body(obj);
-		}
+	}
 	
 	@RequestMapping(method=RequestMethod.POST)
 	public ResponseEntity<Void> insert(@RequestBody Coral obj){
@@ -45,5 +48,12 @@ public class CoralResource {
 	public ResponseEntity<Void> delete(@PathVariable Integer id) {
 		service.delete(id);
 		return ResponseEntity.noContent().build();
+	}
+	
+	@RequestMapping(method = RequestMethod.GET)
+	public ResponseEntity<List<CoralDTO>> findAll() {
+		List<Coral> list = service.findAll();
+		List<CoralDTO> listDto = list.stream().map(obj -> new CoralDTO(obj)).collect(Collectors.toList());
+		return ResponseEntity.ok().body(listDto);
 	}
 }
