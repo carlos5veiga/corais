@@ -11,6 +11,7 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import com.example.corais.domain.Coral;
+import com.example.corais.dto.CoralDTO;
 import com.example.corais.repositories.CoralRepository;
 import com.example.corais.services.exceptions.DataIntegrityException;
 import com.example.corais.services.exceptions.ObjectNotFoundException;
@@ -54,5 +55,9 @@ public class CoralService {
 	public Page<Coral> findPage(Integer page, Integer linesPerPage, String orderBy, String direction){
 		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
 		return repo.findAll(pageRequest);
+	}
+	
+	public Coral fromDto(CoralDTO objDto) {
+		return new Coral(objDto.getId(), objDto.getNome());
 	}
 }
